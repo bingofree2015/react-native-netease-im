@@ -131,6 +131,15 @@ class Session {
     sendVideoMessage(file,duration, width, height,displayName){
         return RNNeteaseIm.sendVideoMessage(file,duration, width, height,displayName);
     }
+
+    /**
+     * 发送文件信息
+     * @param file 文件
+     * @param displayName 文件显示名称，可为空
+     */
+    sendFileMessage(file, displayName){
+        return RNNeteaseIm.sendFileMessage(file, displayName);
+    }
     /**
      * 发送地理位置消息
      * @param latitude 纬度

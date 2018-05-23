@@ -93,13 +93,10 @@
     return message;
 }
 
-+ (NIMMessage*)msgWithVideo:(NSString*)filePath andeSession:(NIMSession *)session
++ (NIMMessage*)msgWithVideo:(NSString*)filePath duration:(NSString *)duration width:(NSString *)width height:(NSString *)height displayName:(NSString *)displayName andeSession:(NIMSession *)session
 {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
-    NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
     NIMVideoObject *videoObject = [[NIMVideoObject alloc] initWithSourcePath:filePath];
-    videoObject.displayName = [NSString stringWithFormat:@"视频发送于%@",dateString];
+    videoObject.displayName = displayName;
     NIMMessage *message = [[NIMMessage alloc] init];
     message.messageObject = videoObject;
     message.apnsContent = @"发来了一段视频";
@@ -141,6 +138,15 @@
     return message;
 }
 
++ (NIMMessage*)msgWithFile:(NSString *)filePath displayName:(NSString *)displayName andeSession:(NIMSession *)session{
+    NIMFileObject *fileObj = [[NIMFileObject alloc] initWithSourcePath:filePath];
+    fileObj.displayName = displayName;
+    NIMMessage *message = [[NIMMessage alloc] init];
+    message.messageObject = fileObj;
+    message.apnsContent = @"发送了一个文件";
+    [NIMMessageMaker setupMessagePushBody:message andSession:session];
+    return message;
+}
 
 + (NIMMessage*)msgWithLocation:(NIMKitLocationPoint *)locationPoint andeSession:(NIMSession *)session{
     NIMLocationObject *locationObject = [[NIMLocationObject alloc] initWithLatitude:locationPoint.coordinate.latitude

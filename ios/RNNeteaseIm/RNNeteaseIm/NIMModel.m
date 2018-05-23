@@ -153,4 +153,9 @@
     }
 }
 
+- (void)setAttachmentProgressDict:(NSDictionary *)attachmentProgressDict{
+    if (self.myBlock) {
+        self.myBlock(17, attachmentProgressDict);
+    }
+}
 @end

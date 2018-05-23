@@ -21,7 +21,9 @@
 
 + (NIMMessage *)msgWithImagePath:(NSString *)path andeSession:(NIMSession *)session;
 
-+ (NIMMessage *)msgWithVideo:(NSString *)filePath andeSession:(NIMSession *)session;
++ (NIMMessage *)msgWithVideo:(NSString *)filePath duration:(NSString *)duration width:(NSString *)width height:(NSString *)height displayName:(NSString *)displayName andeSession:(NIMSession *)session;
+
++ (NIMMessage *)msgWithFile:(NSString *)filePath displayName:(NSString *)displayName andeSession:(NIMSession *)session;
 
 + (NIMMessage *)msgWithLocation:(NIMKitLocationPoint*)locationPoint andeSession:(NIMSession *)session;
 

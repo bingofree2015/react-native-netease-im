@@ -1,6 +1,7 @@
 package com.netease.im;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
@@ -35,6 +36,7 @@ import com.netease.nimlib.sdk.friend.FriendService;
 import com.netease.nimlib.sdk.friend.model.AddFriendNotify;
 import com.netease.nimlib.sdk.msg.MsgService;
 import com.netease.nimlib.sdk.msg.attachment.AudioAttachment;
+import com.netease.nimlib.sdk.msg.attachment.FileAttachment;
 import com.netease.nimlib.sdk.msg.attachment.ImageAttachment;
 import com.netease.nimlib.sdk.msg.attachment.LocationAttachment;
 import com.netease.nimlib.sdk.msg.attachment.MsgAttachment;
@@ -163,6 +165,9 @@ public class ReactCache {
                         break;
                     case video:
                         content = "[视频]";
+                        break;
+                    case file:
+                        content = "[文件]";
                         break;
                     case audio:
                         content = "[语音消息]";
@@ -734,6 +739,7 @@ public class ReactCache {
      * case image
      * case voice
      * case video
+     * case file
      * case location
      * case notification
      * case redpacket
@@ -940,6 +946,21 @@ public class ReactCache {
                     videoDic.putString(MessageConstant.MediaFile.THUMB_PATH, videoAttachment.getThumbPath());
                 }
                 itemMap.putMap(MESSAGE_EXTEND, videoDic);
+            } else if (item.getMsgType() == MsgTypeEnum.file){
+                WritableMap fileDic = Arguments.createMap();
+                if (attachment instanceof FileAttachment) {
+                    FileAttachment fileAttachment = (FileAttachment) attachment;
+                    fileDic.putString(MessageConstant.File.FILE_NAME, fileAttachment.getFileName());
+                    fileDic.putString(MessageConstant.File.EXTENSION, fileAttachment.getExtension());
+                    fileDic.putString(MessageConstant.File.DISPLAY_NAME, fileAttachment.getDisplayName());
+                    fileDic.putString(MessageConstant.File.URL, fileAttachment.getUrl());
+                    fileDic.putString(MessageConstant.File.PATH, fileAttachment.getPath());
+                    fileDic.putString(MessageConstant.File.PATH_FOR_SAVE, fileAttachment.getPathForSave());
+                    fileDic.putString(MessageConstant.File.THUMB_PATH, fileAttachment.getThumbPath());
+                    fileDic.putString(MessageConstant.File.THUMB_PATH_FOR_SAVE, fileAttachment.getThumbPathForSave());
+                    fileDic.putString(MessageConstant.File.SIZE, Long.toString(fileAttachment.getSize()));
+                }
+                itemMap.putMap(MESSAGE_EXTEND, fileDic);
             } else if (item.getMsgType() == MsgTypeEnum.location) {
                 WritableMap locationObj = Arguments.createMap();
                 if (attachment instanceof LocationAttachment) {

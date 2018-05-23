@@ -1131,6 +1131,16 @@ public class RNNeteaseImModule extends ReactContextBaseJavaModule implements Lif
     }
 
     @ReactMethod
+    public void sendFileMessage(String file, String displayName, final Promise promise) {
+        sessionService.sendFileMessage(file, displayName, new SessionService.OnSendMessageListener() {
+            @Override
+            public int onResult(int code, IMMessage message) {
+                return 0;
+            }
+        });
+    }
+
+    @ReactMethod
     public void sendDefaultMessage(String type, String digst, String content, final Promise promise) {
         sessionService.sendDefaultMessage(type, digst, content, new SessionService.OnSendMessageListener() {
             @Override

@@ -341,7 +341,11 @@ RCT_EXPORT_METHOD(sendCustomMessage:(nonnull  NSString *)attachment config:(nonn
 }
 //发送视频消息
 RCT_EXPORT_METHOD(sendVideoMessage:(nonnull  NSString *)file duration:(nonnull  NSString *)duration width:(nonnull  NSString *)width height:(nonnull  NSString *)height displayName:(nonnull  NSString *)displayName){
-    [[ConversationViewController initWithConversationViewController]sendTextMessage:file duration:duration width:width height:height displayName:displayName];
+    [[ConversationViewController initWithConversationViewController]sendVideoMessage:file duration:duration width:width height:height displayName:displayName];
+}
+//发送文件消息
+RCT_EXPORT_METHOD(sendFileMessage:(nonnull  NSString *)file displayName:(nonnull  NSString *)displayName){
+    [[ConversationViewController initWithConversationViewController]sendFileMessage:file displayName:displayName];
 }
 //发送地理位置消息
 RCT_EXPORT_METHOD(sendLocationMessage:(nonnull  NSString *)latitude longitude:(nonnull  NSString *)longitude address:(nonnull  NSString *)address){
@@ -782,6 +786,10 @@ RCT_EXPORT_METHOD(cleanCache){
                 //资金变动通知
                 [_bridge.eventDispatcher sendDeviceEventWithName:@"observeAccountNotice" body:param];
                 break;
+            case 17:
+                //上传下载进度
+                [_bridge.eventDispatcher sendDeviceEventWithName:@"observeAttachmentProgress" body:param];
+                break;
             default:
                 break;
         }
@@ -857,6 +865,11 @@ RCT_EXPORT_METHOD(setupWebViewUserAgent){
             break;
     }
     return strNetWork;
+}
+
+//下载文件附件
+RCT_EXPORT_METHOD(downloadAttachment:(nonnull NSString *)strMessageID isThumb:(nonnull NSString *)isThumb resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject) {
+    [[ConversationViewController initWithConversationViewController]downloadAttachment:strMessageID];
 }
 
 @end

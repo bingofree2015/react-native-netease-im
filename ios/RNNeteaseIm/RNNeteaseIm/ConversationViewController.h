@@ -34,7 +34,8 @@ typedef void(^Errors)(id erro);
 //发送音频
 -(void)sendAudioMessage:(  NSString *)file duration:(  NSString *)duration;
 //发送视频
--(void)sendTextMessage:(  NSString *)path duration:(  NSString *)duration width:(  NSString *)width height:(  NSString *)height displayName:(  NSString *)displayName;
+-(void)sendVideoMessage:(  NSString *)path duration:(  NSString *)duration width:(  NSString *)width height:(  NSString *)height displayName:(  NSString *)displayName;
+-(void)sendFileMessage:(NSString *)path displayName:(  NSString *)displayName;
 //发送自定义消息
 -(void)sendCustomMessage:(  NSString *)attachment config:(  NSString *)config;
 //发送地理位置消息
@@ -78,4 +79,6 @@ typedef void(^Errors)(id erro);
 - (NIMMessage *)msgWithTip:(NSString *)tip;
 //重发消息
 - (void)resendMessage:(NSString *)messageID;
+//下载文件附件
+- (void)downloadAttachment:(NSString *)messageID;
 @end
