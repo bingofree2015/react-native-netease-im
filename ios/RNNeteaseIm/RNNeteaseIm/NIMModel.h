@@ -31,5 +31,6 @@ typedef void(^onSuccess)(NSInteger index,id param);
 @property (strong, nonatomic) NSDictionary *deleteMessDict;//撤销时删除的消息ID
 @property (strong, nonatomic) NSDictionary *accountNoticeDict;//接收到资金变动的消息
 @property(nonatomic,strong)NSDictionary *attachmentProgressDict; //上传下载进度
+@property(nonatomic,strong)NSDictionary *pushDict;  //推送通知
 - (void)insertMessages:(NSArray *)messages;
 @end

@@ -790,6 +790,10 @@ RCT_EXPORT_METHOD(cleanCache){
                 //上传下载进度
                 [_bridge.eventDispatcher sendDeviceEventWithName:@"observeAttachmentProgress" body:param];
                 break;
+            case 18:
+                //推送点击通知
+                [_bridge.eventDispatcher sendDeviceEventWithName:@"observeBackgroundPushEvent" body:param];
+                break;
             default:
                 break;
         }

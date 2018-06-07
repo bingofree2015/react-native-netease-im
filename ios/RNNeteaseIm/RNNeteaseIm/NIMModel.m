@@ -152,10 +152,17 @@
         self.myBlock(16, accountNoticeDict);
     }
 }
-
+//文件下载进度
 - (void)setAttachmentProgressDict:(NSDictionary *)attachmentProgressDict{
     if (self.myBlock) {
         self.myBlock(17, attachmentProgressDict);
     }
 }
+//推送点击通知
+- (void)setPushDict:(NSDictionary *)pushDict{
+    if (self.myBlock) {
+        self.myBlock(18, pushDict);
+    }
+}
+
 @end

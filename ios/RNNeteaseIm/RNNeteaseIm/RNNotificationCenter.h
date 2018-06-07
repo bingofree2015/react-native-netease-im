@@ -11,4 +11,5 @@
 @interface RNNotificationCenter : NSObject
 + (instancetype)sharedCenter;
 - (void)start;
++(void) didReceiveRemoteNotification:(NSDictionary *)pushInfo;
 @end

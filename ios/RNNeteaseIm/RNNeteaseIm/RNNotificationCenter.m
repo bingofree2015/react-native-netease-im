@@ -170,4 +170,10 @@
     return nil;
 }
 
++(void) didReceiveRemoteNotification:(NSDictionary *)pushInfo
+{
+    NIMModel *model = [NIMModel initShareMD];
+    model.pushDict = pushInfo;
+}
+
 @end

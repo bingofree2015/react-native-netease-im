@@ -126,7 +126,8 @@ public class SessionUtil {
             if (!TextUtils.isEmpty(content)) {
                 JSONObject object = JSON.parseObject(content);
                 JSONObject data = object.getJSONObject("data");
-
+                if(data == null)
+                    return;
                 JSONObject dict = data.getJSONObject("dict");
                 String sendId = dict.getString("sendId");
                 String openId = dict.getString("openId");
